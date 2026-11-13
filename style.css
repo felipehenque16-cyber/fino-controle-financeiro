@@ -187,3 +187,44 @@ button:disabled { cursor: wait; opacity: .6; }
   .spending-hint { font-size: .68rem; }
   .app-footer { font-size: .65rem; }
 }
+
+/* Educação financeira e exportação */
+.spending-actions { display:flex; align-items:center; gap:14px; }
+.pdf-button { min-height:38px; padding:0 13px; border:1px solid #dfe8d3; border-radius:10px; background:#f5f9ed; color:#405b2c; font-size:.76rem; font-weight:700; }
+.pdf-button:hover { background:#eaf3dc; }
+.tips-panel { background:linear-gradient(135deg,#fff 0%,#fbfdf7 100%); }
+.tip-highlight { margin:-4px 0 18px; padding:13px 15px; border-left:3px solid #a9d955; border-radius:0 10px 10px 0; background:#f4f8eb; color:#40523a; font-size:.86rem; line-height:1.55; }
+.tips-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:11px; }
+.tip-card { padding:15px 14px; border:1px solid var(--border); border-radius:13px; background:#fff; }
+.tip-number { color:#8bad51; font:700 .68rem "Manrope",sans-serif; letter-spacing:1px; }
+.tip-card h3 { margin:8px 0 6px; color:var(--text); font:700 .86rem "Manrope",sans-serif; }
+.tip-card p { margin:0; color:var(--muted); font-size:.75rem; line-height:1.55; }
+.tips-source { margin:15px 0 0; color:#8b958d; font-size:.7rem; line-height:1.5; }
+.tips-source a { color:#617d3e; font-weight:700; }
+.print-report { color:#18251f; font-family:Arial,sans-serif; }
+.print-report-header { display:flex; justify-content:space-between; align-items:flex-start; padding-bottom:18px; border-bottom:2px solid #dfe8d3; }
+.print-report-header h1 { margin:0 0 8px; font-size:25px; letter-spacing:-1px; }
+.print-report-header p:last-child { margin:0; color:#66736b; }
+.print-brand { color:#405b2c; font-size:25px; font-weight:800; }
+.print-summary { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:22px 0 28px; }
+.print-summary > div { padding:14px; border:1px solid #e2e8dc; border-radius:10px; }
+.print-summary span { display:block; margin-bottom:7px; color:#66736b; font-size:12px; }
+.print-summary strong { font-size:18px; }
+.print-report h2 { margin:24px 0 10px; font-size:16px; }
+.print-table { width:100%; border-collapse:collapse; font-size:11px; }
+.print-table th,.print-table td { padding:9px 8px; border-bottom:1px solid #e8ebe6; text-align:left; }
+.print-table th { background:#f4f7ef; color:#53634c; }
+.print-number { text-align:right !important; white-space:nowrap; }
+.print-note { margin-top:25px; color:#7c877e; font-size:10px; line-height:1.5; }
+@media (max-width:800px) { .tips-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:560px) { .spending-actions { align-items:flex-end; flex-direction:column-reverse; gap:3px; } .pdf-button { min-height:34px; font-size:.7rem; } .tips-grid { grid-template-columns:1fr; } }
+@media print {
+  @page { size:A4; margin:16mm; }
+  body { background:#fff !important; }
+  body * { visibility:hidden !important; }
+  #printReport,#printReport * { visibility:visible !important; }
+  #printReport { display:block !important; position:absolute; inset:0; width:100%; padding:0; }
+  #printReport[hidden] { display:block !important; }
+  .print-table { page-break-inside:auto; }
+  .print-table tr { page-break-inside:avoid; }
+}
