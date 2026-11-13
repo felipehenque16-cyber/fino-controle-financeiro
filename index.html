@@ -98,13 +98,31 @@
             <p class="eyebrow">VISÃO DO MÊS</p>
             <h2>Seu ritmo de gastos</h2>
           </div>
-          <button id="btnRenda" class="link" type="button">Ajustar renda <span aria-hidden="true">↗</span></button>
+          <div class="spending-actions">
+            <button id="btnExportarPDF" class="pdf-button" type="button">↓ Baixar relatório PDF</button>
+            <button id="btnRenda" class="link" type="button">Ajustar renda <span aria-hidden="true">↗</span></button>
+          </div>
         </div>
         <div class="barra-txt">
           <span id="usoTexto">0% da renda usada</span>
           <span class="spending-hint">da renda disponível</span>
         </div>
         <div class="barra-fundo"><div id="usoBarra" class="barra-fill"></div></div>
+      </section>
+
+      <section class="painel tips-panel" aria-labelledby="tituloDicas">
+        <div class="section-heading">
+          <div><p class="eyebrow">EDUCAÇÃO FINANCEIRA</p><h2 id="tituloDicas">Pequenos passos, escolhas melhores</h2></div>
+          <span class="heading-mark" aria-hidden="true">✦</span>
+        </div>
+        <p id="dicaDestaque" class="tip-highlight" role="status">Organização começa com clareza: acompanhe o que entra e o que sai.</p>
+        <div class="tips-grid">
+          <article class="tip-card"><span class="tip-number">01</span><h3>Registre tudo</h3><p>Anote também os pequenos gastos. Eles ajudam a entender para onde seu dinheiro está indo.</p></article>
+          <article class="tip-card"><span class="tip-number">02</span><h3>Planeje antes</h3><p>Separe despesas essenciais, variáveis e ocasionais. Defina limites realistas para cada categoria.</p></article>
+          <article class="tip-card"><span class="tip-number">03</span><h3>Crie uma reserva</h3><p>Se possível, guarde um valor que caiba no orçamento. Começar pequeno também é começar.</p></article>
+          <article class="tip-card"><span class="tip-number">04</span><h3>Revise suas dívidas</h3><p>Liste valores, parcelas e juros. Compare o custo das dívidas antes de decidir como priorizar os pagamentos.</p></article>
+        </div>
+        <p class="tips-source">Conteúdo educativo inspirado em materiais do <a href="https://www.bcb.gov.br/cidadaniafinanceira" target="_blank" rel="noopener noreferrer">Banco Central do Brasil</a>. Não é recomendação de investimento.</p>
       </section>
 
       <section class="painel transaction-panel">
@@ -178,8 +196,18 @@
       </div>
     </div>
     <footer class="app-footer"><span>Feito para cuidar melhor do que importa.</span><span>fino<span class="brand-dot">.</span></span></footer>
+    <section id="printReport" class="print-report" aria-label="Relatório financeiro" hidden>
+      <header class="print-report-header"><div><p class="eyebrow">FINO · CONTROLE FINANCEIRO</p><h1>Relatório financeiro</h1><p id="printPeriod"></p></div><span class="print-brand">fino.</span></header>
+      <div id="printSummary" class="print-summary"></div>
+      <h2>Despesas por categoria</h2><div id="printCategories"></div>
+      <h2>Movimentações do período</h2>
+      <table class="print-table"><thead><tr><th>Data</th><th>Descrição</th><th>Categoria</th><th>Tipo</th><th>Valor</th></tr></thead><tbody id="printTransactions"></tbody></table>
+      <p class="print-note">Relatório gerado pelo Fino. Os dados são armazenados localmente neste dispositivo. Confira os lançamentos antes de tomar decisões financeiras.</p>
+    </section>
+
   </main>
   <script src="script.js"></script>
   <script src="pwa.js"></script>
+  <script src="extras.js"></script>
 </body>
 </html>
