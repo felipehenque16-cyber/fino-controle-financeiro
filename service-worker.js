@@ -1,4 +1,4 @@
-const CACHE_NAME = "fino-app-v6";
+const CACHE_NAME = "fino-app-v7";
 const APP_FILES = [
   "./",
   "./index.html",
