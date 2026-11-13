@@ -228,3 +228,28 @@ button:disabled { cursor: wait; opacity: .6; }
   .print-table { page-break-inside:auto; }
   .print-table tr { page-break-inside:avoid; }
 }
+
+/* Guia 50–30–20 e botão de exportação */
+.budget-guide-panel { padding:24px; background:linear-gradient(145deg,#fff 0%,#fbfcf8 100%); }
+.budget-guide-intro { max-width:690px; margin:12px 0 20px; color:var(--muted); font-size:.83rem; line-height:1.6; }
+.budget-rule-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+.budget-rule-card { min-width:0; padding:17px; border:1px solid var(--border); border-radius:15px; background:#fff; }
+.budget-rule-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
+.budget-rule-icon { display:grid; width:34px; height:34px; place-items:center; border-radius:11px; background:#f1f5e9; color:#6f8c48; font-size:1.1rem; }
+.budget-rule-percent { color:#78954c; font:800 1.55rem "Manrope",sans-serif; letter-spacing:-1px; }
+.budget-rule-card h3 { margin:0 0 6px; color:var(--text); font:700 .91rem "Manrope",sans-serif; }
+.budget-rule-card p { min-height:38px; margin:0 0 15px; color:var(--muted); font-size:.73rem; line-height:1.5; }
+.budget-rule-card strong { display:block; color:var(--text); font:700 1.12rem "Manrope",sans-serif; letter-spacing:-.4px; }
+.budget-rule-card small { display:block; margin-top:3px; color:#9aa39c; font-size:.67rem; }
+.budget-rule-track { height:5px; margin-top:14px; overflow:hidden; border-radius:99px; background:#edf0e9; }
+.budget-rule-track span { display:block; height:100%; border-radius:99px; background:#b9df71; }
+.budget-rule-card.wants .budget-rule-track span { background:#a9c5a0; }
+.budget-rule-card.goals .budget-rule-track span { background:#789b55; }
+.budget-guide-note { margin:15px 0 0; color:#929c93; font-size:.7rem; line-height:1.55; }
+.spending-actions { display:flex; align-items:center; gap:16px; }
+.pdf-button { display:inline-flex; align-items:center; justify-content:center; gap:9px; min-height:39px; padding:0 13px; border:1px solid #e3ebd9; border-radius:11px; background:#f5f8ef; color:#405b2c; font-size:.76rem; font-weight:700; transition:background .18s,border-color .18s,transform .18s; }
+.pdf-button:hover { transform:translateY(-1px); border-color:#cbdcb6; background:#edf4e3; }
+.pdf-button-icon { display:grid; width:22px; height:22px; place-items:center; border-radius:7px; background:#e5efd8; color:#557536; font-size:.9rem; }
+.pdf-button-format { padding:3px 5px; border-radius:5px; background:#e9efdf; color:#718c4d; font-size:.58rem; letter-spacing:.5px; }
+@media(max-width:700px) { .budget-rule-grid { grid-template-columns:1fr; } .budget-rule-card { padding:15px; } .budget-rule-card p { min-height:0; } }
+@media(max-width:560px) { .spending-actions { gap:10px; } .pdf-button { min-height:36px; padding:0 9px; font-size:.7rem; } .pdf-button-format { display:none; } }
