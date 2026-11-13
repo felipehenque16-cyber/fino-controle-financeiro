@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f6f2">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>Fino — Controle financeiro</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="app-header">
+      <a class="brand" href="#" aria-label="Fino — início">
+        <span class="brand-mark" aria-hidden="true">f</span>
+        <span>fino<span class="brand-dot">.</span></span>
+      </a>
+      <div class="header-actions">
+        <button id="installApp" class="install-app" type="button" hidden>Instalar app <span aria-hidden="true">↓</span></button>
+        <span class="header-note"><span class="status-dot"></span> Seu espaço financeiro</span>
+        <p id="installHelp" class="install-help" role="status" hidden></p>
+      </div>
+    </header>
+
+    <section class="intro">
+      <div>
+        <p class="eyebrow">CONTROLE FINANCEIRO PESSOAL</p>
+        <h1>Mais clareza para<br><span>cuidar do seu dinheiro.</span></h1>
+      </div>
+      <p class="intro-copy">Acompanhe suas escolhas, organize seus gastos e fique mais perto dos seus planos.</p>
+    </section>
+
+    <dialog id="setup" class="income-dialog" aria-labelledby="rendaTitulo" aria-describedby="rendaDescricao">
+      <span class="setup-icon" aria-hidden="true">✳</span>
+      <p class="eyebrow">SEU PLANEJAMENTO</p>
+      <h2 id="rendaTitulo">Qual é a sua renda mensal?</h2>
+      <p id="rendaDescricao" class="dialog-description">Informe quanto você recebe por mês para começar a acompanhar seu saldo.</p>
+      <p id="rendaError" class="form-error" role="alert" hidden></p>
+      <form id="formRenda" class="form-renda">
+        <label for="rendaInput">Renda mensal</label>
+        <div class="income-form-row">
+          <input id="rendaInput" type="number" step="0.01" min="0.01" placeholder="Ex: 3.500,00" required>
+          <button type="submit">Salvar renda</button>
+        </div>
+      </form>
+      <button id="btnManterRenda" class="keep-income" type="button" hidden>Continuar com a renda salva <span aria-hidden="true">→</span></button>
+    </dialog>
+
+    <dialog id="dialogCategorias" class="income-dialog categories-dialog" aria-labelledby="tituloCategorias" aria-describedby="descricaoCategorias">
+      <span class="setup-icon" aria-hidden="true">◌</span>
+      <p class="eyebrow">PLANEJE SEU MÊS</p>
+      <h2 id="tituloCategorias">Categorias e limites</h2>
+      <p id="descricaoCategorias" class="dialog-description">Defina quanto pretende gastar em cada categoria e acompanhe o progresso ao longo do mês.</p>
+      <form id="formCategorias" class="category-settings-form">
+        <div id="listaLimites" class="budget-settings-list"></div>
+        <div class="add-category">
+          <label for="novaCategoria">Adicionar categoria</label>
+          <div class="add-category-row">
+            <input id="novaCategoria" maxlength="30" placeholder="Ex: Educação">
+            <button id="btnAdicionarCategoria" type="button">Adicionar</button>
+          </div>
+        </div>
+        <p id="erroCategorias" class="form-error" role="alert" hidden></p>
+        <div class="category-dialog-actions">
+          <button id="btnCancelarCategorias" class="cancel-button" type="button">Cancelar</button>
+          <button type="submit">Salvar ajustes</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div id="principal" hidden>
+
+      <section class="resumo" aria-label="Resumo financeiro">
+        <div class="card income-card">
+          <div class="card-label"><span class="metric-icon income-icon" aria-hidden="true">↗</span><span>Renda do mês</span></div>
+          <strong id="receitas" class="verde">R$ 0,00</strong>
+          <span class="card-caption">Renda + entradas extras</span>
+        </div>
+        <div class="card expense-card">
+          <div class="card-label"><span class="metric-icon expense-icon" aria-hidden="true">↘</span><span>Despesas</span></div>
+          <strong id="despesas" class="vermelho">R$ 0,00</strong>
+          <span class="card-caption">Total gasto no período</span>
+        </div>
+        <div class="card balance-card">
+          <div class="card-label"><span class="metric-icon balance-icon" aria-hidden="true">◉</span><span>Saldo restante</span></div>
+          <strong id="saldo">R$ 0,00</strong>
+          <span class="card-caption">Disponível para você</span>
+        </div>
+      </section>
+
+      <section class="painel spending-panel">
+        <div class="spending-heading">
+          <div>
+            <p class="eyebrow">VISÃO DO MÊS</p>
+            <h2>Seu ritmo de gastos</h2>
+          </div>
+          <button id="btnRenda" class="link" type="button">Ajustar renda <span aria-hidden="true">↗</span></button>
+        </div>
+        <div class="barra-txt">
+          <span id="usoTexto">0% da renda usada</span>
+          <span class="spending-hint">da renda disponível</span>
+        </div>
+        <div class="barra-fundo"><div id="usoBarra" class="barra-fill"></div></div>
+      </section>
+
+      <section class="painel transaction-panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">MANTENHA TUDO EM DIA</p>
+            <h2>Nova transação</h2>
+          </div>
+          <span class="heading-mark" aria-hidden="true">＋</span>
+        </div>
+        <form id="form">
+          <label class="field field-description">
+            <span>Descrição</span>
+            <input id="descricao" placeholder="Ex: Mercado" required maxlength="50">
+          </label>
+          <label class="field">
+            <span>Valor</span>
+            <input id="valor" type="number" step="0.01" min="0.01" placeholder="0,00" required>
+          </label>
+          <label class="field">
+            <span>Tipo</span>
+            <select id="tipo">
+              <option value="despesa">Despesa</option>
+              <option value="receita">Receita extra</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Categoria</span>
+            <select id="categoria">
+              <option>Alimentação</option>
+              <option>Moradia</option>
+              <option>Transporte</option>
+              <option>Lazer</option>
+              <option>Saúde</option>
+              <option>Salário</option>
+              <option>Outros</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Data</span>
+            <input id="data" type="date" required>
+          </label>
+          <button type="submit">Adicionar transação <span aria-hidden="true">↗</span></button>
+        </form>
+        <p id="appError" class="form-error" role="alert" hidden></p>
+      </section>
+
+      <div class="detail-grid">
+        <section class="painel list-panel">
+          <div class="topo">
+            <div>
+              <p class="eyebrow">SEU HISTÓRICO</p>
+              <h2>Transações</h2>
+            </div>
+            <label class="sr-only" for="filtroMes">Filtrar transações por mês</label>
+            <input id="filtroMes" type="month" aria-label="Filtrar por mês">
+          </div>
+          <ul id="lista"></ul>
+        </section>
+
+        <section class="painel categories-panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">PARA ONDE VAI</p>
+              <h2>Despesas por categoria</h2>
+            </div>
+            <button id="btnCategorias" class="heading-mark category-settings-button" type="button" aria-label="Configurar categorias e limites" title="Configurar categorias e limites">⚙</button>
+          </div>
+          <div id="categorias"></div>
+        </section>
+      </div>
+    </div>
+    <footer class="app-footer"><span>Feito para cuidar melhor do que importa.</span><span>fino<span class="brand-dot">.</span></span></footer>
+  </main>
+  <script src="script.js"></script>
+  <script src="pwa.js"></script>
+</body>
+</html>
