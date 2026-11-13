@@ -99,7 +99,7 @@
             <h2>Seu ritmo de gastos</h2>
           </div>
           <div class="spending-actions">
-            <button id="btnExportarPDF" class="pdf-button" type="button">↓ Baixar relatório PDF</button>
+            <button id="btnExportarPDF" class="pdf-button" type="button"><span class="pdf-button-icon" aria-hidden="true">↓</span><span>Exportar relatório</span><span class="pdf-button-format">PDF</span></button>
             <button id="btnRenda" class="link" type="button">Ajustar renda <span aria-hidden="true">↗</span></button>
           </div>
         </div>
@@ -110,19 +110,33 @@
         <div class="barra-fundo"><div id="usoBarra" class="barra-fill"></div></div>
       </section>
 
-      <section class="painel tips-panel" aria-labelledby="tituloDicas">
+      <section class="painel budget-guide-panel" aria-labelledby="tituloDicas">
         <div class="section-heading">
-          <div><p class="eyebrow">EDUCAÇÃO FINANCEIRA</p><h2 id="tituloDicas">Pequenos passos, escolhas melhores</h2></div>
-          <span class="heading-mark" aria-hidden="true">✦</span>
+          <div><p class="eyebrow">GUIA DE ORÇAMENTO</p><h2 id="tituloDicas">Uma forma simples de dividir sua renda</h2></div>
+          <span class="heading-mark" aria-hidden="true">◒</span>
         </div>
-        <p id="dicaDestaque" class="tip-highlight" role="status">Organização começa com clareza: acompanhe o que entra e o que sai.</p>
-        <div class="tips-grid">
-          <article class="tip-card"><span class="tip-number">01</span><h3>Registre tudo</h3><p>Anote também os pequenos gastos. Eles ajudam a entender para onde seu dinheiro está indo.</p></article>
-          <article class="tip-card"><span class="tip-number">02</span><h3>Planeje antes</h3><p>Separe despesas essenciais, variáveis e ocasionais. Defina limites realistas para cada categoria.</p></article>
-          <article class="tip-card"><span class="tip-number">03</span><h3>Crie uma reserva</h3><p>Se possível, guarde um valor que caiba no orçamento. Começar pequeno também é começar.</p></article>
-          <article class="tip-card"><span class="tip-number">04</span><h3>Revise suas dívidas</h3><p>Liste valores, parcelas e juros. Compare o custo das dívidas antes de decidir como priorizar os pagamentos.</p></article>
+        <p class="budget-guide-intro">Use a regra 50–30–20 como ponto de partida. Os valores são calculados com base na sua renda mensal e podem ser ajustados à sua realidade.</p>
+        <div class="budget-rule-grid">
+          <article class="budget-rule-card needs">
+            <div class="budget-rule-top"><span class="budget-rule-icon" aria-hidden="true">⌂</span><span class="budget-rule-percent">50%</span></div>
+            <h3>Necessidades</h3><p>Moradia, contas, alimentação, transporte e saúde.</p>
+            <strong id="budgetNeeds">R$ 0,00</strong><small>referência mensal</small>
+            <div class="budget-rule-track"><span style="width:50%"></span></div>
+          </article>
+          <article class="budget-rule-card wants">
+            <div class="budget-rule-top"><span class="budget-rule-icon" aria-hidden="true">✳</span><span class="budget-rule-percent">30%</span></div>
+            <h3>Desejos</h3><p>Lazer, assinaturas, compras e experiências.</p>
+            <strong id="budgetWants">R$ 0,00</strong><small>referência mensal</small>
+            <div class="budget-rule-track"><span style="width:30%"></span></div>
+          </article>
+          <article class="budget-rule-card goals">
+            <div class="budget-rule-top"><span class="budget-rule-icon" aria-hidden="true">↗</span><span class="budget-rule-percent">20%</span></div>
+            <h3>Futuro financeiro</h3><p>Reserva de emergência, objetivos e pagamento de dívidas.</p>
+            <strong id="budgetGoals">R$ 0,00</strong><small>referência mensal</small>
+            <div class="budget-rule-track"><span style="width:20%"></span></div>
+          </article>
         </div>
-        <p class="tips-source">Conteúdo educativo inspirado em materiais do <a href="https://www.bcb.gov.br/cidadaniafinanceira" target="_blank" rel="noopener noreferrer">Banco Central do Brasil</a>. Não é recomendação de investimento.</p>
+        <p class="budget-guide-note">A regra 50–30–20 é apenas uma referência educativa, não uma obrigação. Se seus custos essenciais forem maiores, adapte os percentuais à sua realidade.</p>
       </section>
 
       <section class="painel transaction-panel">
