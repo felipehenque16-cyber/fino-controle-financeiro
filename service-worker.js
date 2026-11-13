@@ -1,9 +1,10 @@
-const CACHE_NAME = "fino-app-v5";
+const CACHE_NAME = "fino-app-v6";
 const APP_FILES = [
   "./",
   "./index.html",
   "./style.css",
   "./script.js",
+  "./extras.js",
   "./pwa.js",
   "./manifest.webmanifest",
   "./icons/icon.svg",
