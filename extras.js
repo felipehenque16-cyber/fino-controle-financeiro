@@ -14,18 +14,11 @@
   };
   const mesSelecionado = () => $("filtroMes")?.value || new Date().toISOString().slice(0,7);
   function atualizarDica() {
-    const {transacoes,renda} = obterDados();
-    const mes = mesSelecionado();
-    const itens = transacoes.filter(t => typeof t.data === "string" && t.data.startsWith(mes));
-    const extras = itens.filter(t => t.tipo === "receita").reduce((s,t) => s + Number(t.valor || 0),0);
-    const despesas = itens.filter(t => t.tipo === "despesa").reduce((s,t) => s + Number(t.valor || 0),0);
-    const saldo = renda + extras - despesas;
-    const el = $("dicaDestaque");
-    if (!el) return;
-    if (!itens.length) el.textContent = "Comece registrando suas movimentações. Com os dados do mês, fica mais fácil identificar hábitos e planejar os próximos passos.";
-    else if (saldo < 0) el.textContent = "Atenção ao orçamento: as despesas registradas já superam as receitas deste mês. Revise os gastos e priorize o que é essencial.";
-    else if (!despesas) el.textContent = "Você ainda não registrou despesas neste mês. Inclua seus gastos para ter uma visão mais realista do orçamento.";
-    else el.textContent = "Seu saldo registrado está positivo. Revise as categorias e avalie se é possível separar uma quantia para seus objetivos.";
+    const {renda} = obterDados();
+    [["budgetNeeds",0.5],["budgetWants",0.3],["budgetGoals",0.2]].forEach(([id,percentual]) => {
+      const el = $(id);
+      if (el) el.textContent = moeda(renda * percentual);
+    });
   }
   function adicionarCelula(linha, texto, classe) {
     const celula = document.createElement("td");
