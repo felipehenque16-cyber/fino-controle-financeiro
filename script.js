@@ -319,6 +319,48 @@ function render() {
   renderCategorias(visiveis);
 }
 
+function renderGuiaOrcamento(itens) {
+  const totalRenda = renda + itens
+    .filter((t) => t.tipo === "receita")
+    .reduce((acc, t) => acc + t.valor, 0);
+
+  const faixas = [
+    ["budgetEssentials", 0.55, 0.70],
+    ["budgetLifestyle", 0.10, 0.15],
+    ["budgetReserve", 0.05, 0.10],
+    ["budgetPriorities", 0.05, 0.15],
+  ];
+
+  faixas.forEach(([id, minimo, maximo]) => {
+    const elemento = document.getElementById(id);
+    if (!elemento) return;
+    elemento.textContent = totalRenda > 0
+      ? `${moeda(totalRenda * minimo)} a ${moeda(totalRenda * maximo)}`
+      : "Informe sua renda";
+  });
+
+  const despesas = itens
+    .filter((t) => t.tipo === "despesa")
+    .reduce((acc, t) => acc + t.valor, 0);
+  const percentual = totalRenda > 0 ? (despesas / totalRenda) * 100 : 0;
+  const status = document.getElementById("budgetMonthStatus");
+  const detalhe = document.getElementById("budgetMonthDetail");
+
+  if (despesas === 0) {
+    status.textContent = "Ainda não há despesas registradas neste mês.";
+    detalhe.textContent = "Adicione seus gastos para acompanhar quanto da renda já está comprometido. Lembre-se de lançar também as contas fixas.";
+  } else if (percentual > 100) {
+    status.textContent = "Os gastos registrados já passaram da renda do mês.";
+    detalhe.textContent = `${moeda(despesas)} em despesas, o equivalente a ${percentual.toFixed(0)}% da renda considerada. Revise os lançamentos e priorize as contas essenciais.`;
+  } else if (percentual > 75) {
+    status.textContent = "Boa parte da renda já está comprometida.";
+    detalhe.textContent = `${moeda(despesas)} em despesas (${percentual.toFixed(0)}% da renda). Antes de assumir novos gastos, confira as contas que ainda faltam vencer.`;
+  } else {
+    status.textContent = "Você ainda tem margem no orçamento registrado.";
+    detalhe.textContent = `${moeda(despesas)} em despesas (${percentual.toFixed(0)}% da renda). Separe primeiro o valor das contas que ainda não foram lançadas.`;
+  }
+}
+
 function renderTotais(itens) {
   const extras = itens
     .filter((t) => t.tipo === "receita")
