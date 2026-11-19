@@ -92,6 +92,29 @@
         </div>
       </section>
 
+      
+      <section class="month-insight-panel" aria-live="polite">
+        <div class="month-insight-heading">
+          <div>
+            <p class="eyebrow">LEITURA DO MÊS</p>
+            <h2>Como está seu dinheiro?</h2>
+          </div>
+          <span class="insight-spark" aria-hidden="true">✳</span>
+        </div>
+        <div class="month-insight-content">
+          <div class="insight-main">
+            <span>Saldo após os lançamentos</span>
+            <strong id="insightBalance">R$ 0,00</strong>
+            <p id="insightMessage">Registre suas movimentações para acompanhar seu mês.</p>
+          </div>
+          <div class="insight-side">
+            <div><span>Maior gasto</span><strong id="insightTopCategory">—</strong></div>
+            <div><span>Média por dia</span><strong id="insightDailyAverage">R$ 0,00</strong></div>
+          </div>
+        </div>
+        <p class="insight-disclaimer">Estimativa baseada somente nos lançamentos registrados no período.</p>
+      </section>
+
       <section class="painel spending-panel">
         <div class="spending-heading">
           <div>
@@ -225,6 +248,27 @@
         </form>
         <p id="appError" class="form-error" role="alert" hidden></p>
       </section>
+
+      
+      <details class="panel recurring-panel">
+        <summary class="recurring-summary">
+          <span class="recurring-icon" aria-hidden="true">↻</span>
+          <span><small class="eyebrow">DESPESAS QUE SE REPETEM</small><strong>Contas fixas e recorrentes</strong><em>Cadastre uma vez e lance no mês quando precisar.</em></span>
+          <span class="recurring-chevron" aria-hidden="true">⌄</span>
+        </summary>
+        <div class="recurring-content">
+          <form id="formContaFixa" class="recurring-form">
+            <label class="field"><span>Nome da conta</span><input id="contaFixaNome" maxlength="50" placeholder="Ex: Internet" required></label>
+            <label class="field"><span>Valor (R$)</span><input id="contaFixaValor" type="number" min="0.01" step="0.01" placeholder="0,00" required></label>
+            <label class="field"><span>Categoria</span><select id="contaFixaCategoria"></select></label>
+            <label class="field"><span>Vencimento</span><input id="contaFixaDia" type="number" min="1" max="31" value="10" required></label>
+            <button type="submit">Salvar conta <span aria-hidden="true">＋</span></button>
+          </form>
+          <p id="contasFixasFeedback" class="recurring-feedback" role="status" hidden></p>
+          <div class="recurring-list-heading"><strong>Suas contas cadastradas</strong><span id="contasFixasCount">0 contas</span></div>
+          <div id="listaContasFixas" class="recurring-list"></div>
+        </div>
+      </details>
 
       <div class="detail-grid">
         <section class="painel list-panel">
