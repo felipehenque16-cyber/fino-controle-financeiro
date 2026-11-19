@@ -1,6 +1,7 @@
 const CHAVE = "controle-financeiro:transacoes";
 const CHAVE_RENDA = "controle-financeiro:renda";
 const CHAVE_CONFIG_CATEGORIAS = "controle-financeiro:config-categorias";
+const CHAVE_CONTAS_FIXAS = "controle-financeiro:contas-fixas";
 const CATEGORIAS_PADRAO = [
   "Alimentação",
   "Moradia",
@@ -27,6 +28,11 @@ const novaCategoria = document.getElementById("novaCategoria");
 const erroCategorias = document.getElementById("erroCategorias");
 const selectCategoria = document.getElementById("categoria");
 const selectBanco = document.getElementById("banco");
+const formContaFixa = document.getElementById("formContaFixa");
+const listaContasFixas = document.getElementById("listaContasFixas");
+const selectContaFixaCategoria = document.getElementById("contaFixaCategoria");
+const feedbackContasFixas = document.getElementById("contasFixasFeedback");
+
 const campoOutroBanco = document.getElementById("campoOutroBanco");
 const outroBancoInput = document.getElementById("outroBanco");
 
@@ -51,6 +57,22 @@ function carregarTransacoes() {
 
 function salvarTransacoes() {
   localStorage.setItem(CHAVE, JSON.stringify(transacoes));
+}
+
+function carregarContasFixas() {
+  try {
+    const salvas = JSON.parse(localStorage.getItem(CHAVE_CONTAS_FIXAS)) || [];
+    return Array.isArray(salvas) ? salvas.filter((item) =>
+      item && item.id != null && typeof item.descricao === "string" &&
+      Number(item.valor) > 0 && Number(item.dia) >= 1 && Number(item.dia) <= 31
+    ) : [];
+  } catch {
+    return [];
+  }
+}
+
+function salvarContasFixas() {
+  localStorage.setItem(CHAVE_CONTAS_FIXAS, JSON.stringify(contasFixas));
 }
 
 function carregarRenda() {
@@ -88,6 +110,7 @@ function carregarConfigCategorias() {
 let transacoes = carregarTransacoes();
 let renda = carregarRenda();
 let { categorias, limites } = carregarConfigCategorias();
+let contasFixas = carregarContasFixas();
 let categoriasRascunho = [];
 let limitesRascunho = {};
 
@@ -315,10 +338,141 @@ function render() {
     .sort((a, b) => b.data.localeCompare(a.data));
 
   renderTotais(visiveis);
+  renderVisaoMes(visiveis);
   renderGuiaOrcamento(visiveis);
+  renderContasFixas();
   renderLista(visiveis);
   renderCategorias(visiveis);
 }
+
+function renderVisaoMes(itens) {
+  const extras = itens.filter((t) => t.tipo === "receita").reduce((s, t) => s + Number(t.valor || 0), 0);
+  const despesas = itens.filter((t) => t.tipo === "despesa").reduce((s, t) => s + Number(t.valor || 0), 0);
+  const saldo = renda + extras - despesas;
+  const porCategoria = {};
+  itens.filter((t) => t.tipo === "despesa").forEach((t) => {
+    porCategoria[t.categoria] = (porCategoria[t.categoria] || 0) + Number(t.valor || 0);
+  });
+  const maior = Object.entries(porCategoria).sort((a, b) => b[1] - a[1])[0];
+  const [ano, mes] = filtroMes.value.split("-").map(Number);
+  const diasNoMes = new Date(ano, mes, 0).getDate();
+  const hojeLocal = new Date();
+  const mesmoMes = hojeLocal.getFullYear() === ano && hojeLocal.getMonth() + 1 === mes;
+  const diasConsiderados = mesmoMes ? Math.max(1, hojeLocal.getDate()) : diasNoMes;
+  document.getElementById("insightBalance").textContent = moeda(saldo);
+  document.getElementById("insightBalance").className = saldo < 0 ? "vermelho" : "verde";
+  document.getElementById("insightTopCategory").textContent = maior ? maior[0] : "Sem despesas";
+  document.getElementById("insightDailyAverage").textContent = moeda(despesas / diasConsiderados);
+  const mensagem = document.getElementById("insightMessage");
+  if (despesas === 0) mensagem.textContent = "Ainda não há despesas registradas. Comece lançando suas contas e gastos do dia a dia.";
+  else if (saldo < 0) mensagem.textContent = "Os gastos registrados superaram a renda considerada. Revise os lançamentos e priorize o que é essencial.";
+  else if (despesas / Math.max(1, renda + extras) >= 0.75) mensagem.textContent = "Boa parte da renda já foi utilizada. Confira as contas que ainda faltam entrar no planejamento.";
+  else mensagem.textContent = "Seu orçamento registrado ainda tem margem. Lembre de incluir as contas fixas para ter uma visão mais completa.";
+}
+
+function renderContasFixas() {
+  const mes = filtroMes.value;
+  const [ano, numeroMes] = mes.split("-").map(Number);
+  const nomes = categorias;
+  const anterior = selectContaFixaCategoria.value;
+  selectContaFixaCategoria.replaceChildren();
+  nomes.forEach((nome) => {
+    const option = document.createElement("option");
+    option.value = nome;
+    option.textContent = nome;
+    selectContaFixaCategoria.append(option);
+  });
+  if (nomes.includes(anterior)) selectContaFixaCategoria.value = anterior;
+  listaContasFixas.replaceChildren();
+  document.getElementById("contasFixasCount").textContent = contasFixas.length + (contasFixas.length === 1 ? " conta" : " contas");
+  if (!contasFixas.length) {
+    const vazio = document.createElement("p");
+    vazio.className = "recurring-empty";
+    vazio.textContent = "Nenhuma conta cadastrada ainda. Adicione uma conta acima para facilitar seus próximos lançamentos.";
+    listaContasFixas.append(vazio);
+    return;
+  }
+  contasFixas.forEach((conta) => {
+    const linha = document.createElement("article");
+    linha.className = "recurring-item";
+    const info = document.createElement("div");
+    info.className = "recurring-item-info";
+    const nome = document.createElement("strong");
+    nome.textContent = conta.descricao;
+    const detalhe = document.createElement("small");
+    detalhe.textContent = conta.categoria + " · vence dia " + conta.dia;
+    info.append(nome, detalhe);
+    const valor = document.createElement("strong");
+    valor.className = "recurring-value";
+    valor.textContent = moeda(conta.valor);
+    const acoes = document.createElement("div");
+    acoes.className = "recurring-item-actions";
+    const lancada = transacoes.some((t) => String(t.recorrenciaId) === String(conta.id) && t.recorrenciaMes === mes);
+    const lancar = document.createElement("button");
+    lancar.type = "button";
+    lancar.className = "recurring-launch";
+    lancar.dataset.lancarConta = conta.id;
+    lancar.disabled = lancada;
+    lancar.textContent = lancada ? "Lançada neste mês" : "Lançar no mês";
+    const excluir = document.createElement("button");
+    excluir.type = "button";
+    excluir.className = "recurring-delete";
+    excluir.dataset.excluirConta = conta.id;
+    excluir.setAttribute("aria-label", "Excluir " + conta.descricao);
+    excluir.textContent = "×";
+    acoes.append(lancar, excluir);
+    linha.append(info, valor, acoes);
+    listaContasFixas.append(linha);
+  });
+}
+
+formContaFixa.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const descricao = document.getElementById("contaFixaNome").value.trim();
+  const valor = Number(document.getElementById("contaFixaValor").value);
+  const dia = Number(document.getElementById("contaFixaDia").value);
+  const categoria = selectContaFixaCategoria.value;
+  if (!descricao || !Number.isFinite(valor) || valor <= 0 || !Number.isInteger(dia) || dia < 1 || dia > 31) return;
+  const nova = { id: Date.now(), descricao, valor, dia, categoria };
+  contasFixas.push(nova);
+  try {
+    salvarContasFixas();
+    formContaFixa.reset();
+    document.getElementById("contaFixaDia").value = "10";
+    feedbackContasFixas.hidden = true;
+    renderContasFixas();
+  } catch (error) {
+    contasFixas = contasFixas.filter((item) => item.id !== nova.id);
+    feedbackContasFixas.textContent = "Não foi possível salvar esta conta neste aparelho.";
+    feedbackContasFixas.hidden = false;
+  }
+});
+
+listaContasFixas.addEventListener("click", (e) => {
+  const excluir = e.target.closest("[data-excluir-conta]");
+  const lancar = e.target.closest("[data-lancar-conta]");
+  if (excluir) {
+    const anterior = contasFixas;
+    contasFixas = contasFixas.filter((item) => String(item.id) !== excluir.dataset.excluirConta);
+    try { salvarContasFixas(); renderContasFixas(); }
+    catch { contasFixas = anterior; renderContasFixas(); }
+    return;
+  }
+  if (lancar && !lancar.disabled) {
+    const conta = contasFixas.find((item) => String(item.id) === lancar.dataset.lancarConta);
+    if (!conta) return;
+    const [ano, mes] = filtroMes.value.split("-").map(Number);
+    const dia = Math.min(conta.dia, new Date(ano, mes, 0).getDate());
+    const data = ano + "-" + String(mes).padStart(2, "0") + "-" + String(dia).padStart(2, "0");
+    const nova = { id: Date.now(), descricao: conta.descricao, valor: Number(conta.valor), tipo: "despesa", categoria: conta.categoria, banco: "", data, recorrenciaId: conta.id, recorrenciaMes: filtroMes.value };
+    transacoes.push(nova);
+    try { salvarTransacoes(); limparErro(appError); render(); }
+    catch (error) {
+      transacoes = transacoes.filter((item) => item.id !== nova.id);
+      mostrarErro(appError, "Não foi possível lançar esta conta. Tente novamente.");
+    }
+  }
+});
 
 function renderGuiaOrcamento(itens) {
   const totalRenda = renda + itens
