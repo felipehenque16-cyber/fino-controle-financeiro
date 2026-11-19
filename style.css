@@ -313,3 +313,187 @@ form#form { grid-template-columns:1.45fr .85fr .9fr 1fr 1.15fr 1fr auto; }
   .budget-reality-card > strong { font-size:1rem; }
 }
 @media(max-width:370px) { .budget-reality-grid { grid-template-columns:1fr; } }
+
+
+/* Refinamento visual do guia de orçamento */
+.budget-guide-panel {
+  border-color:#e4eadd;
+  background:#fff;
+  box-shadow:0 10px 28px rgb(34 54 41 / 4%);
+}
+.budget-guide-summary {
+  position:relative;
+  min-height:76px;
+  padding:16px 20px;
+  transition:background .2s ease;
+}
+.budget-guide-summary:hover { background:#fbfcf8; }
+.budget-guide-summary-icon {
+  flex-basis:42px;
+  width:42px;
+  height:42px;
+  border:1px solid #e5edda;
+  border-radius:14px;
+  background:linear-gradient(145deg,#f4f8eb,#eaf2dd);
+  color:#64833f;
+  font-size:1.35rem;
+}
+.budget-guide-summary-copy { gap:4px; }
+.budget-guide-summary-copy .eyebrow {
+  color:#82956c;
+  font-size:.57rem;
+  letter-spacing:1.35px;
+}
+.budget-guide-summary-copy strong {
+  font-size:.94rem;
+  letter-spacing:-.25px;
+}
+.budget-guide-summary-copy small {
+  color:#89938b;
+  font-size:.72rem;
+}
+.budget-guide-chevron {
+  display:grid;
+  flex:0 0 30px;
+  width:30px;
+  height:30px;
+  place-items:center;
+  border:1px solid #edf0e9;
+  border-radius:10px;
+  background:#fff;
+  color:#71845d;
+  font-size:1.05rem;
+}
+.budget-guide-content {
+  padding:18px 20px 20px;
+  border-top:1px solid #edf0e9;
+  background:linear-gradient(180deg,#fcfdfb 0%,#fff 42%);
+}
+.budget-guide-content .budget-guide-intro {
+  max-width:720px;
+  margin:0 0 17px;
+  color:#707c73;
+  font-size:.8rem;
+  line-height:1.65;
+}
+.budget-reality-grid { gap:11px; }
+.budget-reality-card {
+  position:relative;
+  min-height:174px;
+  padding:15px 14px 14px;
+  overflow:hidden;
+  border-color:#e9ede6;
+  border-radius:14px;
+  background:#fff;
+  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+}
+.budget-reality-card:hover {
+  transform:translateY(-2px);
+  border-color:#dce6d1;
+  box-shadow:0 8px 18px rgb(34 54 41 / 5%);
+}
+.budget-reality-card::before {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:3px;
+  background:#b9d98c;
+  content:"";
+}
+.budget-reality-card.lifestyle::before { background:#d9c69d; }
+.budget-reality-card.reserve::before { background:#91c6b6; }
+.budget-reality-card.priorities::before { background:#b4a6d7; }
+.budget-reality-heading {
+  gap:9px;
+  margin-bottom:15px;
+  color:#657269;
+  font-size:.73rem;
+}
+.budget-reality-heading > span:first-child {
+  width:31px;
+  height:31px;
+  border:1px solid rgb(105 132 73 / 8%);
+  border-radius:10px;
+  background:#f2f6eb;
+  font-size:1rem;
+}
+.budget-reality-card.lifestyle .budget-reality-heading > span:first-child { background:#faf5eb; }
+.budget-reality-card.reserve .budget-reality-heading > span:first-child { background:#edf7f4; }
+.budget-reality-card.priorities .budget-reality-heading > span:first-child { background:#f4f1fa; }
+.budget-reality-card > strong {
+  font-size:1.18rem;
+  letter-spacing:-.65px;
+}
+.budget-reality-card p {
+  min-height:44px;
+  margin:7px 0 13px;
+  color:#818b83;
+  font-size:.69rem;
+  line-height:1.55;
+}
+.budget-reality-card small {
+  padding-top:10px;
+  border-top:1px solid #f0f2ed;
+  color:#607b43;
+  font-size:.68rem;
+  font-weight:700;
+  font-variant-numeric:tabular-nums;
+}
+.budget-month-check {
+  align-items:center;
+  gap:13px;
+  margin-top:14px;
+  padding:15px 16px;
+  border-color:#e7ecdf;
+  border-radius:13px;
+  background:linear-gradient(110deg,#f7faf2,#fbfcf9);
+}
+.budget-month-check-icon {
+  flex-basis:36px;
+  width:36px;
+  height:36px;
+  border:1px solid #e4ecd9;
+  border-radius:11px;
+  background:#edf4e4;
+  color:#628340;
+  font-size:1.05rem;
+}
+.budget-month-label {
+  margin-bottom:5px;
+  color:#81936f;
+  font-size:.57rem;
+  letter-spacing:1.25px;
+}
+.budget-month-check strong {
+  font-size:.84rem;
+  letter-spacing:-.15px;
+}
+.budget-month-check p {
+  margin-top:5px;
+  color:#7c887e;
+  font-size:.71rem;
+  line-height:1.55;
+}
+.budget-guide-content .budget-guide-note {
+  margin:13px 1px 0;
+  color:#929b93;
+  font-size:.68rem;
+  line-height:1.65;
+}
+@media(max-width:700px) {
+  .budget-guide-summary { min-height:72px; padding:14px; }
+  .budget-guide-content { padding:15px 14px 16px; }
+  .budget-reality-card { min-height:0; }
+}
+@media(max-width:430px) {
+  .budget-guide-summary-copy strong { font-size:.85rem; }
+  .budget-guide-summary-copy small { max-width:235px; font-size:.66rem; line-height:1.4; }
+  .budget-reality-card { padding:13px 11px 12px; }
+  .budget-reality-card > strong { font-size:1.03rem; }
+  .budget-month-check { align-items:flex-start; padding:12px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .budget-guide-summary,.budget-reality-card { transition:none; }
+  .budget-reality-card:hover { transform:none; }
+}
