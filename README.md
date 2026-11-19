@@ -13,7 +13,7 @@ O Fino é uma aplicação web para ajudar no acompanhamento da renda, das despes
 - **Histórico mensal:** consulta e filtro das movimentações por mês.
 - **Despesas por categoria:** acompanhamento de quanto foi gasto em cada categoria.
 - **Categorias e limites:** configuração de categorias personalizadas e limites de gastos.
-- **Guia de orçamento 50–30–20:** aparece após informar a renda mensal, em um painel compacto que pode ser expandido para consultar a divisão entre necessidades (50%), desejos (30%) e futuro financeiro (20%).
+- **Guia de orçamento realista:** apresenta faixas flexíveis para despesas essenciais, vida pessoal, reserva e dívidas/objetivos. Calcula os valores em reais com base na renda e oferece um diagnóstico das despesas registradas no mês.
 - **Relatório em PDF:** preparação de um relatório com resumo, despesas por categoria e movimentações. A opção de impressão do navegador permite salvar o documento como PDF.
 - **Instalação como aplicativo:** suporte a recursos de PWA em navegadores compatíveis.
 
@@ -26,17 +26,18 @@ O Fino é uma aplicação web para ajudar no acompanhamento da renda, das despes
 5. Acompanhe o resumo, os gastos por categoria e os limites definidos.
 6. Use **Exportar relatório** para abrir a visualização de impressão e escolher **Salvar como PDF**.
 
-## 💡 Sobre a regra 50–30–20
+## 💡 Sobre o guia de orçamento
 
-O Fino apresenta essa divisão como uma referência educativa:
+O guia usa faixas flexíveis como ponto de partida, calculadas sobre a renda mensal:
 
-| Percentual | Grupo | Exemplos |
+| Grupo | Faixa sugerida | Exemplos |
 | --- | --- | --- |
-| 50% | Necessidades | Moradia, contas, alimentação, transporte e saúde |
-| 30% | Desejos | Lazer, assinaturas, compras e experiências |
-| 20% | Futuro financeiro | Reserva de emergência, objetivos e dívidas |
+| Essenciais | 55% a 70% | Moradia, alimentação, contas, transporte e saúde |
+| Vida pessoal | 10% a 15% | Lazer, compras e assinaturas |
+| Reserva | 5% a 10% | Reserva de emergência, começando com o que for possível |
+| Dívidas e objetivos | 5% a 15% | Priorizar dívidas com juros altos e depois metas pessoais |
 
-Os percentuais não são uma regra obrigatória. A distribuição deve ser adaptada à renda, aos custos essenciais e à realidade de cada pessoa.
+Essas faixas não precisam ser atingidas ao mesmo tempo nem somar 100%. São referências educativas que devem ser ajustadas à renda, aos custos e às prioridades de cada pessoa. O diagnóstico mensal considera apenas as transações registradas no período selecionado; contas ainda não lançadas não entram no cálculo.
 
 ## 🔒 Privacidade e armazenamento
 
