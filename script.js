@@ -263,6 +263,7 @@ form.addEventListener("submit", (e) => {
     valor: parseFloat(document.getElementById("valor").value),
     tipo: document.getElementById("tipo").value,
     categoria: document.getElementById("categoria").value,
+    banco: selectBanco.value === "Outro" ? outroBancoInput.value.trim() : selectBanco.value,
     data: campoData.value,
   };
   transacoes.push(transacao);
@@ -271,6 +272,8 @@ form.addEventListener("submit", (e) => {
     salvarTransacoes();
     form.reset();
     campoData.value = hoje;
+    campoOutroBanco.hidden = true;
+    outroBancoInput.required = false;
     limparErro(appError);
     render();
   } catch (error) {
