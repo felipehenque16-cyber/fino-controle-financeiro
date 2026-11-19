@@ -315,6 +315,7 @@ function render() {
     .sort((a, b) => b.data.localeCompare(a.data));
 
   renderTotais(visiveis);
+  renderGuiaOrcamento(visiveis);
   renderLista(visiveis);
   renderCategorias(visiveis);
 }
