@@ -52,7 +52,7 @@
     if (!tabela.rows.length) { const p=document.createElement("p"); p.textContent="Nenhuma despesa registrada neste período."; categorias.append(p); }
     else categorias.append(tabela);
     const corpo=$("printTransactions"); corpo.replaceChildren();
-    if (!itens.length) { const linha=document.createElement("tr"); adicionarCelula(linha,"Nenhuma movimentação registrada neste período."); linha.firstChild.colSpan=5; corpo.append(linha); }
+    if (!itens.length) { const linha=document.createElement("tr"); adicionarCelula(linha,"Nenhuma movimentação registrada neste período."); linha.firstChild.colSpan=6; corpo.append(linha); }
     else itens.forEach(t=>{
       const linha=document.createElement("tr"),[a,m,d]=t.data.split("-");
       adicionarCelula(linha,d+"/"+m+"/"+a); adicionarCelula(linha,t.descricao); adicionarCelula(linha,t.categoria); adicionarCelula(linha,t.banco || "—");
