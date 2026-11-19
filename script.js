@@ -26,6 +26,16 @@ const listaLimites = document.getElementById("listaLimites");
 const novaCategoria = document.getElementById("novaCategoria");
 const erroCategorias = document.getElementById("erroCategorias");
 const selectCategoria = document.getElementById("categoria");
+const selectBanco = document.getElementById("banco");
+const campoOutroBanco = document.getElementById("campoOutroBanco");
+const outroBancoInput = document.getElementById("outroBanco");
+
+selectBanco.addEventListener("change", () => {
+  const outro = selectBanco.value === "Outro";
+  campoOutroBanco.hidden = !outro;
+  outroBancoInput.required = outro;
+  if (!outro) outroBancoInput.value = "";
+});
 
 const moeda = (n) =>
   n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
@@ -348,7 +358,7 @@ function renderLista(itens) {
     nome.textContent = t.descricao;
     const detalhe = document.createElement("small");
     const [a, m, d] = t.data.split("-");
-    detalhe.textContent = `${t.categoria} · ${d}/${m}/${a}`;
+    detalhe.textContent = [t.categoria, t.banco, `${d}/${m}/${a}`].filter(Boolean).join(" · ");
     info.append(nome, detalhe);
 
     const valor = document.createElement("span");
