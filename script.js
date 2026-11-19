@@ -359,8 +359,6 @@ function renderVisaoMes(itens) {
   const hojeLocal = new Date();
   const mesmoMes = hojeLocal.getFullYear() === ano && hojeLocal.getMonth() + 1 === mes;
   const diasConsiderados = mesmoMes ? Math.max(1, hojeLocal.getDate()) : diasNoMes;
-  document.getElementById("insightBalance").textContent = moeda(saldo);
-  document.getElementById("insightBalance").className = saldo < 0 ? "vermelho" : "verde";
   document.getElementById("insightTopCategory").textContent = maior ? maior[0] : "Sem despesas";
   document.getElementById("insightDailyAverage").textContent = moeda(despesas / diasConsiderados);
   const mensagem = document.getElementById("insightMessage");
