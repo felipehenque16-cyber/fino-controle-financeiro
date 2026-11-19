@@ -55,7 +55,7 @@
     if (!itens.length) { const linha=document.createElement("tr"); adicionarCelula(linha,"Nenhuma movimentação registrada neste período."); linha.firstChild.colSpan=5; corpo.append(linha); }
     else itens.forEach(t=>{
       const linha=document.createElement("tr"),[a,m,d]=t.data.split("-");
-      adicionarCelula(linha,d+"/"+m+"/"+a); adicionarCelula(linha,t.descricao); adicionarCelula(linha,t.categoria);
+      adicionarCelula(linha,d+"/"+m+"/"+a); adicionarCelula(linha,t.descricao); adicionarCelula(linha,t.categoria); adicionarCelula(linha,t.banco || "—");
       adicionarCelula(linha,t.tipo==="receita"?"Receita extra":"Despesa"); adicionarCelula(linha,moeda(t.valor),"print-number"); corpo.append(linha);
     });
   }
