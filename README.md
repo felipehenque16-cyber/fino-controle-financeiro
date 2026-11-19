@@ -9,11 +9,11 @@ O Fino é uma aplicação web para ajudar no acompanhamento da renda, das despes
 ## ✨ Funcionalidades
 
 - **Resumo financeiro:** visualização da renda do mês, despesas e saldo restante.
-- **Registro de transações:** cadastro de receitas extras e despesas com descrição, valor, categoria e data.
+- **Registro de transações:** cadastro de receitas extras e despesas com descrição, valor, categoria, data e banco/instituição utilizada (opcional).
 - **Histórico mensal:** consulta e filtro das movimentações por mês.
 - **Despesas por categoria:** acompanhamento de quanto foi gasto em cada categoria.
 - **Categorias e limites:** configuração de categorias personalizadas e limites de gastos.
-- **Guia de orçamento 50–30–20:** referência para distribuir a renda entre necessidades (50%), desejos (30%) e objetivos financeiros (20%), com valores calculados a partir da renda mensal informada.
+- **Guia de orçamento 50–30–20:** aparece após informar a renda mensal, em um painel compacto que pode ser expandido para consultar a divisão entre necessidades (50%), desejos (30%) e futuro financeiro (20%).
 - **Relatório em PDF:** preparação de um relatório com resumo, despesas por categoria e movimentações. A opção de impressão do navegador permite salvar o documento como PDF.
 - **Instalação como aplicativo:** suporte a recursos de PWA em navegadores compatíveis.
 
