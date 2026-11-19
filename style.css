@@ -560,3 +560,51 @@ form#form { grid-template-columns:1.45fr .85fr .9fr 1fr 1.15fr 1fr auto; }
   .recurring-item { grid-template-columns:minmax(0,1fr) auto; gap:8px; }
   .recurring-item-actions { grid-column:1 / -1; justify-content:flex-end; }
 }
+
+
+/* Hierarquia e leitura simplificadas */
+.month-insight-panel {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:8px 22px;
+  margin:14px 0 16px;
+  padding:15px 19px 12px;
+  border-radius:14px;
+  box-shadow:none;
+}
+.month-insight-heading { grid-column:1 / -1; }
+.month-insight-heading h2 { font-size:.9rem; }
+.insight-spark { width:29px; height:29px; border-radius:9px; font-size:.9rem; }
+.month-insight-content {
+  grid-template-columns:minmax(0,1fr) minmax(240px,.9fr);
+  align-items:center;
+  gap:18px;
+  margin-top:4px;
+}
+.insight-message { min-width:0; }
+.insight-kicker { display:block; margin-bottom:4px; color:#89958a; font-size:.59rem; font-weight:800; letter-spacing:1px; }
+.insight-message p { max-width:620px; margin:0; color:#5f6c62; font-size:.77rem; line-height:1.5; }
+.insight-side { grid-template-columns:1fr 1fr; gap:8px; }
+.insight-side > div { padding:9px 11px; border:0; border-left:1px solid #e9eee5; border-radius:0; }
+.insight-side span { font-size:.64rem; }
+.insight-side strong { margin-top:4px; font-size:.8rem; }
+.insight-disclaimer { grid-column:1 / -1; margin:2px 0 0; font-size:.61rem; }
+.spending-panel { margin-bottom:15px; }
+.transaction-panel { margin:0 0 17px; }
+.transaction-panel form { gap:12px; }
+.transaction-panel .section-heading { margin-bottom:15px; }
+.detail-grid { align-items:start; gap:16px; }
+.list-panel,.categories-panel { min-width:0; }
+.recurring-panel,.budget-guide-panel { margin-top:14px; margin-bottom:0; box-shadow:none; }
+.recurring-summary,.budget-guide-summary { min-height:66px; padding:13px 16px; }
+.recurring-content,.budget-guide-content { padding:15px 16px; }
+.recurring-form { grid-template-columns:1.3fr .9fr 1fr .65fr auto; gap:9px; }
+.recurring-item { grid-template-columns:minmax(0,1fr) auto; gap:9px 14px; }
+.recurring-item-actions { grid-column:1 / -1; justify-content:flex-end; }
+@media(max-width:760px) {
+  .month-insight-panel { grid-template-columns:1fr; padding:14px; }
+  .month-insight-content { grid-template-columns:1fr; gap:9px; }
+  .insight-side > div { padding:8px 10px; border-left:0; border:1px solid #edf0e9; border-radius:9px; }
+  .recurring-form { grid-template-columns:1fr 1fr; }
+}
