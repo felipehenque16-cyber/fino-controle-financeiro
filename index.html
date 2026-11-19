@@ -115,34 +115,48 @@
           <span class="budget-guide-summary-icon" aria-hidden="true">◎</span>
           <span class="budget-guide-summary-copy">
             <span class="eyebrow">GUIA DE ORÇAMENTO</span>
-            <strong id="tituloDicas">Uma sugestão para dividir sua renda</strong>
-            <small>Regra 50–30–20 · toque para consultar</small>
+            <strong id="tituloDicas">Um plano que cabe na vida real</strong>
+            <small>Faixas flexíveis, calculadas com sua renda · toque para consultar</small>
           </span>
           <span class="budget-guide-chevron" aria-hidden="true">⌄</span>
         </summary>
         <div class="budget-guide-content">
-          <p id="descricaoDicas" class="budget-guide-intro">Uma referência simples para organizar sua renda mensal. Os valores são calculados automaticamente e podem ser adaptados à sua realidade.</p>
-          <div class="budget-rule-grid">
-            <article class="budget-rule-card needs">
-              <div class="budget-rule-top"><span class="budget-rule-icon" aria-hidden="true">🏠</span><span class="budget-rule-percent">50%</span></div>
-              <h3>Necessidades</h3><p>Moradia, contas, alimentação, transporte e saúde.</p>
-              <strong id="budgetNeeds">R$ 0,00</strong><small>referência mensal</small>
-              <div class="budget-rule-track"><span style="width:50%"></span></div>
+          <p class="budget-guide-intro">Não existe divisão perfeita para todo mundo. Use estas faixas como ponto de partida e ajuste primeiro o que é essencial para sua casa.</p>
+          <div class="budget-reality-grid">
+            <article class="budget-reality-card essentials">
+              <div class="budget-reality-heading"><span aria-hidden="true">🏠</span><span>Essenciais</span></div>
+              <strong>55% a 70%</strong>
+              <p>Moradia, alimentação, contas, transporte e saúde.</p>
+              <small id="budgetEssentials">R$ 0,00 a R$ 0,00</small>
             </article>
-            <article class="budget-rule-card wants">
-              <div class="budget-rule-top"><span class="budget-rule-icon" aria-hidden="true">✨</span><span class="budget-rule-percent">30%</span></div>
-              <h3>Desejos</h3><p>Lazer, assinaturas, compras e experiências.</p>
-              <strong id="budgetWants">R$ 0,00</strong><small>referência mensal</small>
-              <div class="budget-rule-track"><span style="width:30%"></span></div>
+            <article class="budget-reality-card lifestyle">
+              <div class="budget-reality-heading"><span aria-hidden="true">☕</span><span>Vida pessoal</span></div>
+              <strong>10% a 15%</strong>
+              <p>Lazer, compras, assinaturas e pequenos prazeres.</p>
+              <small id="budgetLifestyle">R$ 0,00 a R$ 0,00</small>
             </article>
-            <article class="budget-rule-card goals">
-              <div class="budget-rule-top"><span class="budget-rule-icon" aria-hidden="true">🎯</span><span class="budget-rule-percent">20%</span></div>
-              <h3>Futuro financeiro</h3><p>Reserva de emergência, objetivos e dívidas.</p>
-              <strong id="budgetGoals">R$ 0,00</strong><small>referência mensal</small>
-              <div class="budget-rule-track"><span style="width:20%"></span></div>
+            <article class="budget-reality-card reserve">
+              <div class="budget-reality-heading"><span aria-hidden="true">🛟</span><span>Reserva</span></div>
+              <strong>5% a 10%</strong>
+              <p>Comece com pouco, de forma constante, se for possível.</p>
+              <small id="budgetReserve">R$ 0,00 a R$ 0,00</small>
+            </article>
+            <article class="budget-reality-card priorities">
+              <div class="budget-reality-heading"><span aria-hidden="true">🎯</span><span>Dívidas e objetivos</span></div>
+              <strong>5% a 15%</strong>
+              <p>Priorize dívidas caras; depois, avance nas suas metas.</p>
+              <small id="budgetPriorities">R$ 0,00 a R$ 0,00</small>
             </article>
           </div>
-          <p class="budget-guide-note">A regra 50–30–20 é apenas uma referência educativa. Ajuste os percentuais conforme seus custos e sua realidade.</p>
+          <section class="budget-month-check" aria-live="polite">
+            <div class="budget-month-check-icon" aria-hidden="true">↗</div>
+            <div>
+              <span class="budget-month-label">COMO ESTÁ SEU MÊS</span>
+              <strong id="budgetMonthStatus">Registre suas despesas para acompanhar.</strong>
+              <p id="budgetMonthDetail">O diagnóstico considera os lançamentos do mês selecionado, não contas que ainda não foram registradas.</p>
+            </div>
+          </section>
+          <p class="budget-guide-note">As faixas são referências, não cobranças nem metas que precisam ser atingidas ao mesmo tempo. Se a renda estiver apertada, priorize moradia, alimentação, saúde e contas básicas. Se houver dívidas com juros altos, organize sua quitação antes de aumentar a reserva.</p>
         </div>
       </details>
 
