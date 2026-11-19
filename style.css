@@ -286,3 +286,30 @@ form#form { grid-template-columns:1.45fr .85fr .9fr 1fr 1.15fr 1fr auto; }
 @media(max-width:430px) {
   form#form { grid-template-columns:repeat(2,minmax(0,1fr)); }
 }
+
+
+/* Guia de orçamento realista */
+.budget-reality-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+.budget-reality-card { min-width:0; padding:14px; border:1px solid var(--border); border-radius:13px; background:#fff; }
+.budget-reality-heading { display:flex; align-items:center; gap:8px; margin-bottom:12px; color:#637168; font-size:.76rem; font-weight:700; }
+.budget-reality-heading > span:first-child { display:grid; width:29px; height:29px; place-items:center; border-radius:9px; background:#f1f5e9; font-size:.95rem; }
+.budget-reality-card > strong { display:block; color:var(--text); font:800 1.15rem "Manrope",sans-serif; letter-spacing:-.5px; }
+.budget-reality-card p { min-height:48px; margin:7px 0 10px; color:var(--muted); font-size:.7rem; line-height:1.45; }
+.budget-reality-card small { display:block; color:#71844f; font-size:.68rem; font-weight:700; line-height:1.4; }
+.budget-reality-card.lifestyle .budget-reality-heading > span:first-child { background:#f8f2e8; }
+.budget-reality-card.reserve .budget-reality-heading > span:first-child { background:#eaf4f2; }
+.budget-reality-card.priorities .budget-reality-heading > span:first-child { background:#f0edf8; }
+.budget-month-check { display:flex; align-items:flex-start; gap:12px; margin-top:13px; padding:14px; border:1px solid #e7eddf; border-radius:12px; background:#f8faf5; }
+.budget-month-check-icon { display:grid; flex:0 0 30px; width:30px; height:30px; place-items:center; border-radius:9px; background:#eaf2df; color:#5e803b; font-weight:800; }
+.budget-month-check > div:last-child { min-width:0; }
+.budget-month-label { display:block; margin-bottom:4px; color:#8a987e; font-size:.58rem; font-weight:800; letter-spacing:1px; }
+.budget-month-check strong { display:block; color:var(--text); font:700 .82rem "Manrope",sans-serif; }
+.budget-month-check p { margin:5px 0 0; color:var(--muted); font-size:.7rem; line-height:1.5; }
+@media(max-width:850px) { .budget-reality-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:560px) {
+  .budget-reality-grid { grid-template-columns:1fr 1fr; gap:8px; }
+  .budget-reality-card { padding:11px; }
+  .budget-reality-card p { min-height:0; }
+  .budget-reality-card > strong { font-size:1rem; }
+}
+@media(max-width:370px) { .budget-reality-grid { grid-template-columns:1fr; } }
